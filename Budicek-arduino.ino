@@ -1,6 +1,8 @@
 int btn1 = 9;
 int btn2 = 8;
 bool isIdle = false;
+bool isSetup = false;
+char currentMode = 's'; // s - setup alarm time, t - display current time
 
 int choice = 0;
 
@@ -9,7 +11,6 @@ void setup() {
   pinMode(btn1, INPUT);  // Set button 1 pin as input
   pinMode(btn2, INPUT);  // Set button 2 pin as input
 }
-
 int GetInput(){
   int val1 = digitalRead(btn1);
   int val2 = digitalRead(btn2);
@@ -53,14 +54,25 @@ int GetInput(){
   }
 }
 
+
 // the loop routine runs over and over again forever:
 void loop() {
+  if (!isSetup){
+    // nastavení času
+  }
+
   choice = GetInput();
   delay(300);  // delay in between reads for stability
   
   switch (choice){
     case 1:
-      // change mode
+      // switch mode
+      if (currentMode == 's'){
+        currentMode = 't';
+      }
+      if (currentMode == 't'){
+        currentMode = 's';
+      }
     case 2:
       // confirm choice
     case 3:
